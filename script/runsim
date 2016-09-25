@@ -1,0 +1,8 @@
+#!/bin/sh
+
+
+Xephyr -br -screen 800x600 :1 -ac &
+ZEPHYR_PID=$!
+sleep 1
+DISPLAY=:1 /home/slank/git/wm/src/wm
+kill $ZEPHYR_PID
