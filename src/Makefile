@@ -18,7 +18,7 @@ LIBS = -L${X11LIB} -lX11 ${FREETYPELIBS} -lXrandr -lslankdev
 # flags
 CXXFLAGS =  -std=c++11
 CXXFLAGS += -pedantic
-CXXFLAGS += -Wall -Wextra
+CXXFLAGS += -Wall -Wextra -Wno-deprecated-declarations
 CXXFLAGS += ${INCS} -g -O0
 LDFLAGS  =  ${LIBS}
 
@@ -26,20 +26,21 @@ LDFLAGS  =  ${LIBS}
 CXX = g++
 
 
-SRC = main.cc
+SRC = main.cc wm.cc usrcmd.cc
 OBJ = $(SRC:.cc=.o)
 
 all: wm
 re: clean all
 
 .cc.o:
-	@echo CXX $<
+	@echo CXX $@
 	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 ${OBJ}: config.h
 
 wm: $(OBJ)
-	$(CXX) $(OBJ) -o wm 
+	@echo CXX $@
+	@$(CXX) $(CXXFLAGS) $(OBJ) -o wm $(LDFLAGS)
 
 clean:
 	@echo cleaning
