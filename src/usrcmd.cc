@@ -38,6 +38,10 @@ void kill(const Arg* arg _unused)
     }
     throw wmexception("client to delete was not found. it is bug");
 }
+void focusnext(const Arg* arg)
+{
+    mainlog::instance().write("call %s(%d)", __func__, arg->i);
+}
 
 
 } /* usrcmd */
