@@ -15,12 +15,18 @@ Window wm::root  = 0;
 
 void wm::out_status()
 {
+    Window current;
+    int revert;
+    XGetInputFocus(wm::dpy, &current, &revert);
+
     statlog& log = statlog::instance();
     log.clean();
 
     log.write("Display: %p", dpy);
     log.write("screen : %d", screen);
     log.write("root win : %d", root);
+    log.write("root win : 0x%x", root);
+    log.write("current win : 0x%x", current);
 
     for (size_t i=0; i<mon.size(); i++) {
         log.write("Monitor:%zd", i);

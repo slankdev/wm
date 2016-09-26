@@ -20,5 +20,24 @@ void spawn(const Arg* arg)
         throw wmexception("excec failed");
     }
 }
+void kill(const Arg* arg _unused)
+{
+    Window w;
+    int revert;
+    XGetInputFocus(wm::dpy, &w, &revert);
+    mainlog::instance().write("call %s() want to kill 0x%x", __func__, w);
+
+    for (Monitor& m : wm::mon) {
+        for (size_t i=0; i<m.clients.size(); i++) {
+            if (w == m.clients[i].w) {
+                XKillClient(wm::dpy, w);
+                m.clients.erase(m.clients.begin() + i);
+                return ;
+            }
+        }
+    }
+    throw wmexception("client to delete was not found. it is bug");
+}
+
 
 } /* usrcmd */

@@ -10,7 +10,7 @@ static Key keys[] = {
 	{ MODKEY,            XK_Return,   usrcmd::spawn,   Arg::set_v("xterm")     },
 	{ MODKEY,            XK_f,        usrcmd::spawn,   Arg::set_v("chromium")  },
 	{ MODKEY,            XK_p,        usrcmd::spawn,   Arg::set_v("dmenu_run") },
-	// { MODKEY,            XK_c,        kill,       {0}                     },
+	{ MODKEY,            XK_c,        usrcmd::kill,    {0}                     },
 	// { MODKEY,            XK_j,        focusstack, Arg::set_i(+1)          },
 	// { MODKEY,            XK_k,        focusstack, Arg::set_i(-1)          },
 	// { MODKEY,            XK_space,    setlayout,  {0}                     },
