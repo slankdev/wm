@@ -66,13 +66,28 @@ struct Client {
     Monitor *mon;
 };
 
+#if 1
 struct Monitor {
     size_t x;
     size_t y;
     size_t width;
     size_t height;
-    Client *cur;
+    Client* cur;
     std::vector<Client> clients;
     Monitor(size_t ax, size_t ay, size_t aw, size_t ah) : 
         x(ax), y(ay), width(aw), height(ah) {}
 };
+#else
+class Monitor {
+public:
+    size_t x;
+    size_t y;
+    size_t width;
+    size_t height;
+    std::vector<Client> clients;
+    Monitor(size_t ax, size_t ay, size_t aw, size_t ah) : 
+        x(ax), y(ay), width(aw), height(ah) {}
+    Client* cur();
+};
+
+#endif
